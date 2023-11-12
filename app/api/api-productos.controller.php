@@ -79,17 +79,23 @@ class ApiProductosController
       $this->view->response("No se pudo agregar", 500);
     }
   }
-  public function update()
+  public function update($params = null)
   {
     $idProducto = $params[':ID'];
     $body = $this->getData();
 
-    $this->model->update($id, $nombre, $descripcion, $precio, $imagen, $id_categoria);
+    $nombre = $body->nombre;
+    $descripcion = $body->descripcion;
+    $precio = $body->precio;
+    $imagen = $body->imagen;
+    $id_categoria = $body->id_categoria;
+
+    $id = $this->model->update($idProducto, $nombre, $descripcion, $precio, $imagen, $id_categoria);
 
     if ($id == 0) {
-      $this->view->response("El producto con el id $id se modifico correctamente", 200);
+      $this->view->response("El producto se modifico correctamente", 200);
     } else {
-      $this->view->response("El producto con el id $id no pudo ser modificado", 500);
+      $this->view->response("El producto no pudo ser modificado", 500);
     }    
 
   }

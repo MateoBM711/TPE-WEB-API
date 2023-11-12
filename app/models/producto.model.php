@@ -61,6 +61,7 @@ class ProductoModel
 
         return $query->rowCount();
     }
+
     function insert($id, $nombre, $descripcion, $precio, $imagen, $id_categoria)
     {
         $db = $this->connect();
@@ -70,6 +71,7 @@ class ProductoModel
 
         return $db->lastInsertId();
     }
+
     function update($id, $nombre, $descripcion, $precio, $imagen, $id_categoria)
     {
         $db = $this->connect();
