@@ -70,4 +70,13 @@ class ProductoModel
 
         return $db->lastInsertId();
     }
+    function update($id, $nombre, $descripcion, $precio, $imagen, $id_categoria)
+    {
+        $db = $this->connect();
+
+        $query = $db->prepare(' UPTDATE producto(id, nombre, descripcion, precio, imagen, id_categoria) VALUES (?,?,?,?,?,?) ');
+        $query->execute([$id, $nombre, $descripcion, $precio, $imagen, $id_categoria]);
+
+        return $db->lastInsertId();
+    }
 }
