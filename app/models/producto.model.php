@@ -1,10 +1,11 @@
 <?php
+
 class ProductoModel
 {
 
     function connect()
     {
-        $db = new PDO("mysql:host=localhost; dbname=local_limpieza", "root", "");
+        $db = new PDO("mysql:host=localhost; dbname=local_limpieza", "root", "" );        
         return $db;
     }
 
@@ -76,9 +77,11 @@ class ProductoModel
     {
         $db = $this->connect();
 
-        $query = $db->prepare(' UPTDATE producto(id, nombre, descripcion, precio, imagen, id_categoria) VALUES (?,?,?,?,?,?) ');
-        $query->execute([$id, $nombre, $descripcion, $precio, $imagen, $id_categoria]);
+        $query = $db->prepare(' UPDATE producto
+                                SET nombre = ?, descripcion = ?, precio = ?, imagen = ?, id_categoria = ? 
+                                WHERE id = ?');
+        $result = $query->execute([$nombre, $descripcion, $precio, $imagen, $id_categoria, $id]);
 
-        return $db->lastInsertId();
+        return $result;
     }
 }
